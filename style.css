@@ -1,0 +1,94 @@
+body {
+    background-color: #CCC;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .main {
+    display: col;
+  }
+
+  .selections {
+    /* position: absolute; */
+    /* top: 0; */
+    display: flex;
+    justify-content: center;
+    /* padding-left: auto;
+    padding-right: auto; */
+  }
+  
+  .selection {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 4rem;
+    transition: 100ms;
+  }
+  
+  .selection:hover {
+    transform: scale(1.2);
+  }
+  
+  .results {
+    margin-top: 1rem;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    align-items: center;
+  }
+  
+  .result-score {
+    margin-left: .1rem;
+    font-size: .5rem;
+    color: #333;
+  }
+  
+  .result-selection {
+    opacity: .5;
+  }
+  
+  .result-selection.winner {
+    opacity: 1;
+    font-size: 1.5rem;
+  }
+
+  #message-container {
+    padding-top: 20%;
+    max-width: 1200px;
+    justify-content: center;
+    align-items: center;
+    overflow-y: scroll; 
+    height:400px;
+  }
+
+  #message-container div {
+    background-color: #CCC;
+    padding: 5px;
+  }
+
+  .msg {
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  #send-container {
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    padding-bottom: 30px;
+    bottom: 0;
+    display: flex;
+  }
+
+  #message-input {
+    flex-grow: 1;
+    font-size: 1rem;
+  }
+
+  #send-button {
+    font-size: 1rem;
+  }
