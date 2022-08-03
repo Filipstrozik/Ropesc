@@ -1,8 +1,11 @@
-const io = require('socket.io')({
-    cors: {
-        origin: "*"
-    },
-});
+const io = require('socket.io')();
+
+
+// const io = require('socket.io')({
+//     cors: {
+//         origin: "*"
+//     },
+// });
 
 const users = {}
 var decisions = [] // lista obiektow typu seleckja 
