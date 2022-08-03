@@ -1,7 +1,5 @@
 
-const socket = io('https://fathomless-gorge-06353.herokuapp.com', {
-    withCredentials: false
-});
+const socket = io('https://fathomless-gorge-06353.herokuapp.com/');
 
 const messageForm = document.getElementById('send-container')
 const messageContainer = document.getElementById('message-container')

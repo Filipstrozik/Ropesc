@@ -7,12 +7,7 @@
 // });
 
 
-const io = require('socket.io')({
-    cors: {
-        origin: "https://chic-eclair-d591d6.netlify.app",
-        withCredentials: false
-    }
-});
+const io = require('socket.io')();
 
 const users = {}
 var decisions = [] // lista obiektow typu seleckja 
