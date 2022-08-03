@@ -1,4 +1,9 @@
-const socket = io('https://fathomless-gorge-06353.herokuapp.com/')
+const IS_PROD = process.env.NODE_ENV === "production";
+const URL = IS_PROD ? "https://fathomless-gorge-06353.herokuapp.com" : "http://localhost:5000";
+const socket = io(URL);
+
+
+// const socket = io('https://fathomless-gorge-06353.herokuapp.com/')
 
 const messageForm = document.getElementById('send-container')
 const messageContainer = document.getElementById('message-container')
