@@ -8,6 +8,7 @@ body {
   
   .main {
     display: col;
+    width: 80%;
   }
 
   .selections {
@@ -72,7 +73,7 @@ body {
 
   .msg {
     font-size: 3rem;
-    text-align: center;
+    text-align: left;
   }
 
   #send-container {
