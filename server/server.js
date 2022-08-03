@@ -9,7 +9,9 @@
 
 const io = require('socket.io')({
     cors: {
-        origin: "*"
+        origin: "*",
+        credentials: false,
+        withCredentials: false
     },
 });
 
