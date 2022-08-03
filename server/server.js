@@ -1,4 +1,4 @@
-const io = require('socket.io')(process.env.PORT || 3000, {
+const io = require('socket.io')({
     cors: {
         origin: "*"
     },
@@ -79,3 +79,5 @@ function isWinner(selection, opponentSelection){
 function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
   }
+
+io.listen(process.env.PORT || 3000);
