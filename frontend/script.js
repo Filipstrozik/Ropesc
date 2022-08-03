@@ -72,7 +72,17 @@ messageForm.addEventListener('submit', e => {
 function appendMessage(message) {
     const messageElement = document.createElement('div')
     messageElement.className = 'msg'
+    if(message.includes("Ty")){
+        messageElement.style.color = "#1e81b0";
+        messageElement.style.textAlign = "right";
+    }
     messageElement.innerText = message
     messageContainer.append(messageElement)
+    move_down()
 }
+
+function move_down() {
+    const El = document.getElementById('message-container')
+    El.scrollTo({top: El.scrollHeight, behavior: 'smooth'});
+  }
 
