@@ -1,4 +1,3 @@
-
 const socket = io('https://fathomless-gorge-06353.herokuapp.com/');
 
 const messageForm = document.getElementById('send-container')

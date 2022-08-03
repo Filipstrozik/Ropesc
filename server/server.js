@@ -1,12 +1,3 @@
-// const io = require('socket.io')({
-//     cors: {
-//         origin: "https://chic-eclair-d591d6.netlify.app",
-//         methods: ["GET", "POST"],
-//         credentials: true
-//     },
-// });
-
-
 const io = require('socket.io')();
 
 const users = {}
@@ -31,7 +22,6 @@ io.on('connection', socket => {
         noOfUsers-=1
     })
     socket.on('send-selection', selection =>{
-        // decisions[socket.id] = selection
         var newDecision = {
             id: socket.id,
             selection: selection,
