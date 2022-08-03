@@ -1,4 +1,8 @@
-const io = require('socket.io')(3000)
+const io = require('socket.io')(3000, {
+    cors: {
+        origin: "*"
+    },
+});
 
 const users = {}
 var decisions = [] // lista obiektow typu seleckja 
