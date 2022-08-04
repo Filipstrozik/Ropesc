@@ -11,6 +11,7 @@ io.on('connection', socket => {
     socket.on('new-user', name => {
         users[socket.id] = name
         noOfUsers+=1
+        console.log(`new user: ${name}, ${socket}`)
         socket.broadcast.emit('user-connected', name)
     })
 
@@ -21,7 +22,9 @@ io.on('connection', socket => {
     })
 
     socket.on('clear-chat', () => {
+        console.log('reset request...')
         resetDecisions()
+        io.emit('clear-user-chat')
     })
 
     socket.on('disconnect',() => {

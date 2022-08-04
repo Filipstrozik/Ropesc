@@ -66,7 +66,7 @@ socket.on('user-disconnected', name => {
     appendMessage(`${name} disconnected`, "center")
 })
 
-socket.on('clear-chat', () => {
+socket.on('clear-user-chat', () => {
     clearChat()
 })
 
