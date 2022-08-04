@@ -22,7 +22,7 @@ body {
     border: none;
     outline: none;
     cursor: pointer;
-    font-size: 32vw;
+    font-size: 3rem;
     transition: 100ms;
   }
   
