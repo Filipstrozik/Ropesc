@@ -11,12 +11,10 @@ body {
   }
 
   .selections {
-    /* position: absolute; */
-    /* top: 0; */
+    position: relative;
     display: flex;
     justify-content: center;
-    /* padding-left: auto;
-    padding-right: auto; */
+
   }
   
   .selection {
