@@ -108,5 +108,5 @@ function clearChat() {
         e.remove()
     })
     const buttons = document.querySelectorAll('.selection')
-    buttons.forEach(btn => btn.style.pointerEvents = 'pointer');
+    buttons.forEach(btn => btn.style.pointerEvents = 'auto');
 }
