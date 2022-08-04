@@ -6,6 +6,7 @@ const messageForm = document.getElementById('send-container')
 const messageContainer = document.getElementById('message-container')
 const messageInput = document.getElementById('message-input')
 const selectionButtons = document.querySelectorAll('[data-selection]')
+const resetButton = document.getElementById('reset-button')
 
 const SELECTIONS = [
     {
@@ -37,6 +38,12 @@ selectionButtons.forEach(selectionButton => {
     })
 })
 
+resetButton.addEventListener('click', e => {
+    socket.emit('clear-chat')
+})
+
+
+
 function makeSelection(selection){
     appendMessage(`Wybrales ${selection.emoji}`, "center")
     socket.emit('send-selection', selection)
@@ -60,12 +67,7 @@ socket.on('user-disconnected', name => {
 })
 
 socket.on('clear-chat', () => {
-    const divs = document.querySelectorAll('.msg')
-    console.log('cleared chat')
-    divs.forEach(e => {
-        e.remove()
-    });
-    
+    clearChat()
 })
 
 messageForm.addEventListener('submit', e => {
@@ -97,3 +99,10 @@ function move_down() {
     El.scrollTo({top: El.scrollHeight, behavior: 'smooth'});
   }
 
+function clearChat() {
+    const divs = document.querySelectorAll('.msg')
+    console.log('cleared chat')
+    divs.forEach(e => {
+        e.remove()
+    });
+}

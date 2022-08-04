@@ -13,16 +13,23 @@ io.on('connection', socket => {
         noOfUsers+=1
         socket.broadcast.emit('user-connected', name)
     })
+
     // console.log('new user')
     // socket.emit('chat-message', 'Hello World')
     socket.on('send-chat-message', message => {
         socket.broadcast.emit('chat-message', {message: message, name:users[socket.id]})
     })
+
+    socket.on('clear-chat', () => {
+        resetDecisions()
+    })
+
     socket.on('disconnect',() => {
         socket.broadcast.emit('user-disconnected', users[socket.id])
         delete users[socket.id]
         noOfUsers-=1
     })
+
     socket.on('send-selection', selection =>{
         var newDecision = {
             id: socket.id,
@@ -33,7 +40,7 @@ io.on('connection', socket => {
         console.log('pushing new selection to decisions...')
         console.log(newDecision)
         console.log(` users: ${noOfUsers}, decisions: ${decisions.length} `)
-        if(noOfUsers === decisions.length){
+        if(noOfUsers ===  decisions.length){
             console.log('Sprawdzam!')
             for(var i = 0; i < decisions.length; i++){
                 for(var j = i+1; j < decisions.length; j++){
@@ -67,12 +74,13 @@ io.on('connection', socket => {
             //pokaz przycisk "next round" albo cos
             //podobnie jak w przypadku selekcji, czekkaj az wszyscy dadzą next round i dopiero wtedty wyczysc czat i włącz selekcje
             delay(5000).then(() => io.emit('clear-chat'));
-            decisions = []
+            resetDecisions()
         } else {
             socket.broadcast.emit('chat-message', {message: 'is ready!', name:users[socket.id]})
         }
         
     })
+
 })
 
 
@@ -84,6 +92,11 @@ function isWinner(selection, opponentSelection){
 
 function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
-  }
+}
+
+function resetDecisions() {
+    decisions = [];
+}
+
 
 io.listen(process.env.PORT || 3000);
