@@ -1,7 +1,6 @@
 body {
     background-color: #CCC;
     padding: 0;
-    margin: 0;
     display: flex;
     justify-content: center;
   }
@@ -59,7 +58,6 @@ body {
 
   #message-container {
     padding-top: 20%;
-    max-width: 1200px;
     justify-content: center;
     align-items: center;
     overflow-y: auto; 
