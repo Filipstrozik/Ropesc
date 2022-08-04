@@ -1,4 +1,6 @@
 const io = require('socket.io')();
+// const io = require('socket.io')(3000);
+
 
 const users = {}
 var decisions = [] // lista obiektow typu seleckja 
@@ -28,6 +30,9 @@ io.on('connection', socket => {
             win: false
         }
         decisions.push(newDecision);
+        console.log('pushing new selection to decisions...')
+        console.log(newDecision)
+        console.log(` users: ${noOfUsers}, decisions: ${decisions.length} `)
         if(noOfUsers === decisions.length){
             console.log('Sprawdzam!')
             for(var i = 0; i < decisions.length; i++){
@@ -48,13 +53,19 @@ io.on('connection', socket => {
             }
             for(var i = 0; i<decisions.length; i++){
                 if(decisions.at(i).win){
-                    io.emit('chat-message', {message: `${decisions.at(i).selection.emoji} Wygrał/a`, name:users[decisions.at(i).id]})//do
+                    io.emit('chat-notify', {message: `${decisions.at(i).selection.emoji} Wygrał/a`, name:users[decisions.at(i).id]})//do
+                    console.log('won:')
                     console.log(decisions.at(i)) 
                 } else {
-                    io.emit('chat-message', {message: `${decisions.at(i).selection.emoji} Przegrał/a`, name:users[decisions.at(i).id]})//do
+                    io.emit('chat-notify', {message: `${decisions.at(i).selection.emoji} Przegrał/a`, name:users[decisions.at(i).id]})//do
+                    console.log('lost: ')
+                    console.log(decisions.at(i)) 
                 }
-
             }
+            //doperio jak zostaną pokazane wyniki to:
+            //zablokuj wybieranie selekcji
+            //pokaz przycisk "next round" albo cos
+            //podobnie jak w przypadku selekcji, czekkaj az wszyscy dadzą next round i dopiero wtedty wyczysc czat i włącz selekcje
             delay(5000).then(() => io.emit('clear-chat'));
             decisions = []
         } else {

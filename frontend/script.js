@@ -1,4 +1,6 @@
 const socket = io('https://fathomless-gorge-06353.herokuapp.com/');
+// const socket = io('https://localhost:3000');
+
 
 const messageForm = document.getElementById('send-container')
 const messageContainer = document.getElementById('message-container')
@@ -24,7 +26,7 @@ const SELECTIONS = [
   ]
 
 const name = prompt('Jak masz na imię?')
-appendMessage(`${name} Dołączyłeś!`);
+appendMessage(`${name} Dołączyłeś!`, "center");
 socket.emit('new-user', name)
 
 selectionButtons.forEach(selectionButton => {
@@ -36,20 +38,25 @@ selectionButtons.forEach(selectionButton => {
 })
 
 function makeSelection(selection){
-    appendMessage(`Wybrales ${selection.emoji}`)
+    appendMessage(`Wybrales ${selection.emoji}`, "center")
     socket.emit('send-selection', selection)
+    //make selections disabled
 }
 
 socket.on('chat-message', data => {
-    appendMessage(`${data.name}: ${data.message}`)
+    appendMessage(`${data.name}: ${data.message}`, "left")
+})
+
+socket.on('chat-notify', data => {
+    appendMessage(`${data.name}: ${data.message}`, "center")
 })
 
 socket.on('user-connected', name => {
-    appendMessage(`${name} joined`)
+    appendMessage(`${name} joined`, "center")
 })
 
 socket.on('user-disconnected', name => {
-    appendMessage(`${name} disconnected`)
+    appendMessage(`${name} disconnected`, "center")
 })
 
 socket.on('clear-chat', () => {
@@ -64,17 +71,21 @@ socket.on('clear-chat', () => {
 messageForm.addEventListener('submit', e => {
     e.preventDefault()
     const message = messageInput.value
-    appendMessage(`Ty: ${message}`)
+    appendMessage(`Ty: ${message}`, "right")
     socket.emit('send-chat-message', message)
     messageInput.value = ''
 })
 
-function appendMessage(message) {
+function appendMessage(message, position) {
     const messageElement = document.createElement('div')
     messageElement.className = 'msg'
-    if(message.includes("Ty")){
+    if(position === "right" ){
         messageElement.style.color = "#1e81b0";
         messageElement.style.textAlign = "right";
+    }
+    if(position === "center"){
+        messageElement.style.color = "#cc0000";
+        messageElement.style.textAlign = "center";
     }
     messageElement.innerText = message
     messageContainer.append(messageElement)
