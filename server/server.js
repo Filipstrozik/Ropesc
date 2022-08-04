@@ -19,6 +19,7 @@ io.on('connection', socket => {
     // console.log('new user')
     // socket.emit('chat-message', 'Hello World')
     socket.on('send-chat-message', message => {
+        console.log(`message: ${message}, name:${users.get(socket.id)}`)
         socket.broadcast.emit('chat-message', {message: message, name:users.get(socket.id)})
     })
 
