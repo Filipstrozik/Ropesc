@@ -35,7 +35,7 @@ selectionButtons.forEach(selectionButton => {
         const selectionName = selectionButton.dataset.selection
         const selection = SELECTIONS.find(selection => selection.name === selectionName)
         makeSelection(selection)
-        selectionButtons.style.pointerEvents = 'none';
+        document.getElementsByClassName('selection').style.pointerEvents = 'none';
     })
 })
 
@@ -106,5 +106,5 @@ function clearChat() {
     divs.forEach(e => {
         e.remove()
     });
-    document.getElementById('id').style.pointerEvents = 'pointer';
+    document.getElementsByClassName('selection').style.pointerEvents = 'pointer';
 }
