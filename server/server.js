@@ -2,7 +2,7 @@ const io = require('socket.io')();
 // const io = require('socket.io')(3000);
 
 
-const users = {}
+const users = new Map()
 var decisions = [] // lista obiektow typu seleckja 
 var noOfUsers = 0
 
@@ -10,6 +10,7 @@ var noOfUsers = 0
 io.on('connection', socket => {
     socket.on('new-user', name => {
         users[socket.id] = name
+        users.set(socket.id, name)
         noOfUsers+=1
         console.log(`new user: ${name}, ${socket.id}`)
         socket.broadcast.emit('user-connected', name)
@@ -18,7 +19,7 @@ io.on('connection', socket => {
     // console.log('new user')
     // socket.emit('chat-message', 'Hello World')
     socket.on('send-chat-message', message => {
-        socket.broadcast.emit('chat-message', {message: message, name:users[socket.id]})
+        socket.broadcast.emit('chat-message', {message: message, name:users.get(socket.id)})
     })
 
     socket.on('clear-chat', () => {
@@ -27,9 +28,9 @@ io.on('connection', socket => {
         io.emit('clear-user-chat')
     })
 
-    socket.on('disconnect',() => {
-        socket.broadcast.emit('user-disconnected', users[socket.id])
-        delete users[socket.id]
+    socket.on('disconnect', () => {
+        socket.broadcast.emit('user-disconnected', users.get(socket.id))
+        users.delete(socket.id)
         noOfUsers-=1
     })
 
@@ -42,8 +43,8 @@ io.on('connection', socket => {
         decisions.push(newDecision);
         console.log('pushing new selection to decisions...')
         console.log(newDecision)
-        console.log(` users: ${noOfUsers}, decisions: ${decisions.length} `)
-        if(noOfUsers ===  decisions.length){
+        console.log(` users: ${users.size}, decisions: ${decisions.length} `)
+        if(users.size ===  decisions.length){
             console.log('Sprawdzam!')
             for(var i = 0; i < decisions.length; i++){
                 for(var j = i+1; j < decisions.length; j++){

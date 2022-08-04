@@ -40,7 +40,7 @@ selectionButtons.forEach(selectionButton => {
     })
 })
 
-resetButton.addEventListener('click', e => {
+resetButton.addEventListener('click', () => {
     socket.emit('clear-chat')
 })
 
@@ -71,7 +71,7 @@ socket.on('user-disconnected', name => {
 socket.on('clear-user-chat', () => {
     clearChat()
 })
-
+//reset button tez wywyoluje submit.
 messageForm.addEventListener('submit', e => {
     e.preventDefault()
     const message = messageInput.value
