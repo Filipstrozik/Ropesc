@@ -24,7 +24,7 @@ body {
     border: none;
     outline: none;
     cursor: pointer;
-    font-size: 60px;
+    font-size: 2rem;
     transition: 100ms;
   }
   
