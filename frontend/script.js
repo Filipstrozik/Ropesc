@@ -28,7 +28,7 @@ const SELECTIONS = [
 
 const name = prompt('Jak masz na imię?')
 appendMessage(`${name} Dołączyłeś!`, "center");
-socket.emit('new-user', name)
+socket.emit('new-user', name) // wyslanie imienia uzytkownika
 
 selectionButtons.forEach(selectionButton => {
     selectionButton.addEventListener('click', e => {
