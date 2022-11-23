@@ -26,7 +26,7 @@ io.on('connection', socket => {
         console.log('reset request...')
         resetDecisions()
         //better not to clear user chat only decisions
-        //io.emit('clear-user-chat')
+        io.emit('clear-user-chat')
     })
 
     socket.on('disconnect', () => {

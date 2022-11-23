@@ -102,11 +102,11 @@ function move_down() {
   }
 
 function clearChat() {
-    const divs = document.querySelectorAll('.msg')
-    console.log('cleared chat')
-    divs.forEach(e => {
-        e.remove()
-    })
+    // const divs = document.querySelectorAll('.msg')
+    // console.log('cleared chat')
+    // divs.forEach(e => {
+    //     e.remove()
+    // })
     const buttons = document.querySelectorAll('.selection')
     buttons.forEach(btn => btn.style.pointerEvents = 'auto');
 }
