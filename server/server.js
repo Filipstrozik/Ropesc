@@ -3,7 +3,7 @@ const io = require('socket.io')();
 
 
 const users = new Map()
-var decisions = [] // lista obiektow typu seleckja 
+var decisions = [] 
 var noOfUsers = 0
 
 
@@ -16,8 +16,7 @@ io.on('connection', socket => {
         socket.broadcast.emit('user-connected', name)
     })
 
-    // console.log('new user')
-    // socket.emit('chat-message', 'Hello World')
+
     socket.on('send-chat-message', message => {
         console.log(`message: ${message}, name:${users.get(socket.id)}`)
         socket.broadcast.emit('chat-message', {message: message, name:users.get(socket.id)})
@@ -26,7 +25,8 @@ io.on('connection', socket => {
     socket.on('clear-chat', () => {
         console.log('reset request...')
         resetDecisions()
-        io.emit('clear-user-chat')
+        //better not to clear user chat only decisions
+        //io.emit('clear-user-chat')
     })
 
     socket.on('disconnect', () => {
